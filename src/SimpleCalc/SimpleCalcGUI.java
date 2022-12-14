@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SimpleCalcGUI extends JFrame {
-    private JFrame frame;
     private JPanel panel1;
     private JTextField tfNumber1;
     private JComboBox cbOperations;
@@ -14,12 +13,6 @@ public class SimpleCalcGUI extends JFrame {
     private JTextField lblResult;
 
     public SimpleCalcGUI(){
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setSize(600, 300);
-        frame.setTitle("Simple Calculator");
-        frame.setVisible(true);
-        frame.add(panel1);
         tfNumber1.setHorizontalAlignment(SwingConstants.CENTER);
         tfNumber2.setHorizontalAlignment(SwingConstants.CENTER);
         lblResult.setHorizontalAlignment(SwingConstants.CENTER);
@@ -45,13 +38,13 @@ public class SimpleCalcGUI extends JFrame {
                     }
                     lblResult.setText(Integer.toString(result));
                 } catch (NumberFormatException nfe) {
-                    JOptionPane.showMessageDialog(frame, "Please enter an Integer Number");
+                    JOptionPane.showMessageDialog(panel1, "Please enter an Integer Number");
                     lblResult.setText("");
                 } catch (ArithmeticException ae) {
-                    JOptionPane.showMessageDialog(frame, "Cannot divide by Zero");
+                    JOptionPane.showMessageDialog(panel1, "Cannot divide by Zero");
                     lblResult.setText("");
                 } catch (Exception oe) {
-                    JOptionPane.showMessageDialog(frame, "Other Exception");
+                    JOptionPane.showMessageDialog(panel1, "Other Exception");
                     lblResult.setText("");
                 }
             }
@@ -60,5 +53,10 @@ public class SimpleCalcGUI extends JFrame {
 
     public static void main(String[] args) {
         SimpleCalcGUI scGUI = new SimpleCalcGUI();
+        scGUI.setContentPane(scGUI.panel1);
+        scGUI.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        scGUI.setSize(600, 300);
+        scGUI.setTitle("Simple Calculator");
+        scGUI.setVisible(true);
     }
 }
