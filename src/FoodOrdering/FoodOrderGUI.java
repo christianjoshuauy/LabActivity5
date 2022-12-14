@@ -82,10 +82,17 @@ public class FoodOrderGUI extends JFrame {
         btnOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int total = getTotalFoodPrice();
-                double discount = getDiscount();
-                double finalPrice = total - (total * discount);
-                JOptionPane.showMessageDialog(panel1, "The total price is Php " + String.format("%.2f", finalPrice));
+                try{
+                    int total = getTotalFoodPrice();
+                    if(total == 0) { // If no food selected, user can't order
+                        throw new Exception();
+                    }
+                    double discount = getDiscount();
+                    double finalPrice = total - (total * discount);
+                    JOptionPane.showMessageDialog(panel1, "The total price is Php " + String.format("%.2f", finalPrice));
+                } catch (Exception oe) {
+                    JOptionPane.showMessageDialog(panel1, "Please choose a food to order");
+                }
             }
         });
     }
