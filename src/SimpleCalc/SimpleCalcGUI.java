@@ -27,22 +27,33 @@ public class SimpleCalcGUI extends JFrame {
         btnCompute.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int num1 = Integer.parseInt(tfNumber1.getText());
-                int num2 = Integer.parseInt(tfNumber2.getText());
-                char op =  cbOperations.getSelectedItem().toString().charAt(0);
-                int result;
-                if(op == '+') {
-                    result = num1 + num2;
-                } else if (op == '-') {
-                    result = num1 - num2;
+                try {
+                    int num1 = Integer.parseInt(tfNumber1.getText());
+                    int num2 = Integer.parseInt(tfNumber2.getText());
+                    char op =  cbOperations.getSelectedItem().toString().charAt(0);
+                    int result;
+                    if(op == '+') {
+                        result = num1 + num2;
+                    } else if (op == '-') {
+                        result = num1 - num2;
+                    }
+                    else if(op == '*') {
+                        result = num1 * num2;
+                    }
+                    else {
+                        result = num1 / num2;
+                    }
+                    lblResult.setText(Integer.toString(result));
+                } catch (NumberFormatException nfe) {
+                    JOptionPane.showMessageDialog(frame, "Please enter an Integer Number");
+                    lblResult.setText("");
+                } catch (ArithmeticException ae) {
+                    JOptionPane.showMessageDialog(frame, "Cannot divide by Zero");
+                    lblResult.setText("");
+                } catch (Exception oe) {
+                    JOptionPane.showMessageDialog(frame, "Other Exception");
+                    lblResult.setText("");
                 }
-                else if(op == '*') {
-                    result = num1 * num2;
-                }
-                else {
-                    result = num1 / num2;
-                }
-                lblResult.setText(Integer.toString(result));
             }
         });
     }
