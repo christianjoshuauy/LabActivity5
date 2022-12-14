@@ -5,20 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LeapYearGUI extends JFrame {
-    private JFrame frame;
     private JPanel panel1;
     private JTextField tfYear;
     private JButton btnCheckYear;
-    private JOptionPane opResult;
 
     public LeapYearGUI(){
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setSize(500, 300);
-        frame.setTitle("Leap Year Checker");
-        frame.setVisible(true);
-        frame.add(panel1);
-
         btnCheckYear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,11 +39,11 @@ public class LeapYearGUI extends JFrame {
                         output = "Not a leap year";
                     }
 
-                    JOptionPane.showMessageDialog(frame, output);
+                    JOptionPane.showMessageDialog(panel1, output);
                 } catch (NumberFormatException nfe){
-                    JOptionPane.showMessageDialog(frame, "Please enter a valid year");
+                    JOptionPane.showMessageDialog(panel1, "Please enter a valid year");
                 } catch (Exception oe){
-                    JOptionPane.showMessageDialog(frame, "Other Exception");
+                    JOptionPane.showMessageDialog(panel1, "Other Exception");
                 } finally {
                     tfYear.setText("");
                 }
@@ -62,5 +53,10 @@ public class LeapYearGUI extends JFrame {
 
     public static void main(String[] args) {
         LeapYearGUI lyGUI = new LeapYearGUI();
+        lyGUI.setContentPane(lyGUI.panel1);
+        lyGUI.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        lyGUI.setSize(500, 300);
+        lyGUI.setTitle("Leap Year Checker");
+        lyGUI.setVisible(true);
     }
 }
