@@ -22,33 +22,40 @@ public class LeapYearGUI extends JFrame {
         btnCheckYear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int year = Integer.parseInt(tfYear.getText());
-                boolean isLeapYear;
-                String output = null;
+                try {
+                    int year = Integer.parseInt(tfYear.getText());
+                    boolean isLeapYear;
+                    String output = null;
 
-                if(year % 100 == 0){
-                    if(year % 400 == 0){
+                    if(year % 100 == 0){
+                        if(year % 400 == 0){
+                            isLeapYear = true;
+                        }
+                        else {
+                            isLeapYear = false;
+                        }
+                    }
+                    else if(year % 4 == 0){
                         isLeapYear = true;
                     }
                     else {
                         isLeapYear = false;
                     }
-                }
-                else if(year % 4 == 0){
-                    isLeapYear = true;
-                }
-                else {
-                    isLeapYear = false;
-                }
-                if(isLeapYear){
-                    output = "Leap year";
-                }
-                else{
-                    output = "Not a leap year";
-                }
+                    if(isLeapYear){
+                        output = "Leap year";
+                    }
+                    else{
+                        output = "Not a leap year";
+                    }
 
-                JOptionPane.showMessageDialog(frame, output);
-                tfYear.setText("");
+                    JOptionPane.showMessageDialog(frame, output);
+                } catch (NumberFormatException nfe){
+                    JOptionPane.showMessageDialog(frame, "Please enter a valid year");
+                } catch (Exception oe){
+                    JOptionPane.showMessageDialog(frame, "Other Exception");
+                } finally {
+                    tfYear.setText("");
+                }
             }
         });
     }
